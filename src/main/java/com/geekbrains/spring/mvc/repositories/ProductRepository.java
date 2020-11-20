@@ -22,6 +22,7 @@ public class ProductRepository {
         this.products.add(new Product(3L, "fork", "long", "My", 2333.22));
         this.products.add(new Product(4L, "glass", "glass", "addidas", 1111.22));
     }
+
     public List<Product> findAll() {
         return Collections.unmodifiableList(products);
     }

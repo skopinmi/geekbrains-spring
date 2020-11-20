@@ -20,7 +20,7 @@
     </tr>
     </thead>
     <tbody>
-<!--    //    id, title, description, brand, price.-->
+    <!--    //    id, title, description, brand, price.-->
     <!--/*@thymesVar id="products" type="java.util.List<com.geekbrains.spring.mvc.model.Product>"*/-->
     <tr th:each="product : ${products}">
         <td th:text="${product.id}"></td>

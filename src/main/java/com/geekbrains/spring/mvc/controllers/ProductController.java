@@ -31,20 +31,9 @@ public class ProductController {
 
     @GetMapping("/add")
     public String showAddForm() {
-        return "products_add_form";
+        return "product_add_form";
     }
 
-//    @PostMapping("/add")
-//    public String addCustomer(
-//            @RequestParam(name = "id", required = false) Long id,
-//            @RequestParam String name,
-//            @RequestParam String email,
-//            @RequestParam String phone
-//    ) {
-//        Customer customer = new Customer(id, name, email, phone);
-//        customerService.saveOrUpdate(customer);
-//        return "redirect:/customers/";
-//    }
 
     @PostMapping("/add")
     public String addProduct(
@@ -67,18 +56,9 @@ public class ProductController {
             @ModelAttribute Product modifiedProduct
     ) {
         productService.saveOrUpdate(modifiedProduct);
-        return "redirect:/customers/";
+        return "redirect:/products/";
     }
 
-//    @GetMapping(value = "/json/{id}")
-//    public HttpEntity showJsonProduct(
-//            @PathVariable Long id
-//    ) {
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        HttpEntity<Product> entity = new HttpEntity<>(productService.findById(id), headers);
-//        return entity;
-//    }
 
     @GetMapping(value = "/product/{id}")
     public String showProduct(

@@ -10,6 +10,9 @@ public class Product {
     private String brand;
     private Double price;
 
+    public Product (){
+
+    }
     public Product(Long id, String title, String description, String brand, Double price) {
         this.id = id;
         this.title = title;
@@ -54,7 +57,7 @@ public class Product {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
