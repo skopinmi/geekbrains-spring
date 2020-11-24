@@ -28,26 +28,26 @@ public class OneToManyApp {
 
             Category category = new Category();
             category.setTitle("new Category");
-
-            Product product1 = new Product("one Product", category);
-            Product product2 = new Product("two Product", category);
-            List<Product> productList = new ArrayList<>();
-            productList.add(product1);
-            productList.add(product2);
-
-            category.setProducts(productList);
-
-            em.persist(category);
-            transaction.commit();
-
-//            TypedQuery<Category> fromCategory = em.createQuery("FROM Category", Category.class);
-//            fromCategory.getResultList().stream().forEach(Category::toString);
-
-            Category categoryWithProducts = em.createNamedQuery("withProducts", Category.class)
-                    .setParameter("id", category.getId())
-                    .getSingleResult();
-            
-            System.out.println(categoryWithProducts.getProducts());
+//
+//            Product product1 = new Product("one Product", category);
+//            Product product2 = new Product("two Product", category);
+//            List<Product> productList = new ArrayList<>();
+//            productList.add(product1);
+//            productList.add(product2);
+//
+//            category.setProducts(productList);
+//
+//            em.persist(category);
+//            transaction.commit();
+//
+////            TypedQuery<Category> fromCategory = em.createQuery("FROM Category", Category.class);
+////            fromCategory.getResultList().stream().forEach(Category::toString);
+//
+//            Category categoryWithProducts = em.createNamedQuery("withProducts", Category.class)
+//                    .setParameter("id", category.getId())
+//                    .getSingleResult();
+//
+//            System.out.println(categoryWithProducts.getProducts());
 
         } finally {
             factory.close();

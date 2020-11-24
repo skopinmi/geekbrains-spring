@@ -1,6 +1,8 @@
 package ru.geekbrains.lesson3.hibernate.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -8,23 +10,28 @@ import java.util.Objects;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
+//            (strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @Column(name = "title")
     private String title;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @Column
+    private Double price;
 
-    public Product() {
-    }
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "carts",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "customer_id")
+    )
+    private List<Customer> customers = new ArrayList<>();
 
-    public Product(String title, Category category) {
+    public Product(String title, Double price) {
         this.title = title;
-        this.category = category;
+        this.price = price;
     }
 
     public Long getId() {
@@ -43,26 +50,24 @@ public class Product {
         this.title = title;
     }
 
-    public Category getCategory() {
-        return category;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return id.equals(product.id) &&
-                Objects.equals(title, product.title);
+    public List<Customer> getCustomers() {
+        return customers;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title);
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
+    }
+
+    public void addCustomers (Customer customer) {
+        customers.add(customer);
     }
 
     @Override
@@ -70,7 +75,24 @@ public class Product {
         return "Product{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
+                ", price=" + price +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(id, product.id) &&
+                Objects.equals(title, product.title) &&
+                Objects.equals(price, product.price) &&
+                Objects.equals(customers, product.customers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, price, customers);
     }
 }
 
