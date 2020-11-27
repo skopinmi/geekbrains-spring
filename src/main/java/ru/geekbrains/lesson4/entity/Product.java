@@ -22,6 +22,10 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     @Column(name = "something")
     @OptimisticLock(excluded = true)
     private String something;
@@ -36,6 +40,13 @@ public class Product {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
+    }
+
+    public Product(String name, Long quantity, Double price, Category category) {
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+        this.category = category;
     }
 
     public Double getPrice() {
@@ -82,12 +93,22 @@ public class Product {
         return version;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", price='" + price + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", category=" + category +
                 ", something='" + something + '\'' +
                 ", version=" + version +
                 '}';

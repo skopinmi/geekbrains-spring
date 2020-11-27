@@ -26,7 +26,7 @@ public class AppConfig {
         // Создаем источник данных
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         // Задаем параметры подключения к базе данных
-        dataSource.setUrl("jdbc:h2:file:D:\\java-learn\\geekbrains\\spring-lesson4\\db\\demo;MV_STORE=false");
+        dataSource.setUrl("jdbc:h2:file:D:\\Coding\\GeekBrains\\Java\\geekbrains-spring\\db\\demo;MV_STORE=false");
         dataSource.setUsername("sa");
         dataSource.setDriverClassName("org.h2.Driver");
         dataSource.setPassword("");
@@ -57,7 +57,7 @@ public class AppConfig {
         jpaProperties.put("hibernate.jdbc.batch_size", 10);
         // Включает логирование
         jpaProperties.put("hibernate.show_sql", true);
-        //jpaProperties.put("hibernate.hbm2ddl.auto", "update");
+//        jpaProperties.put("hibernate.hbm2ddl.auto", "update");
         jpaProperties.put("hibernate.hbm2ddl.auto", "create");
 
         factory.setJpaProperties(jpaProperties);

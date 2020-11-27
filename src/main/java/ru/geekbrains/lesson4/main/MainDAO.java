@@ -10,19 +10,19 @@ import ru.geekbrains.lesson4.repositories.ArticlesRepository;
 public class MainDAO {
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-
-
-        ArticlesRepository articlesRepository = applicationContext.getBean("articlesRepository", ArticlesRepository.class);
-
-        articlesRepository.save(new Article("New Title 1", new User("Alex")));
-        articlesRepository.save(new Article("New Title 2", new User("Alena")));
-        articlesRepository.save(new Article("New Title 3", new User("Milena")));
-
-
-        ArticleDAO articleDAO = applicationContext.getBean("articleDAO", ArticleDAO.class);
-
-        articleDAO.findAll().stream().forEach(System.out::println);
+//        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+//
+//
+//        ArticlesRepository articlesRepository = applicationContext.getBean("articlesRepository", ArticlesRepository.class);
+//
+//        articlesRepository.save(new Article("New Title 1", new User("Alex")));
+//        articlesRepository.save(new Article("New Title 2", new User("Alena")));
+//        articlesRepository.save(new Article("New Title 3", new User("Milena")));
+//
+//
+//        ArticleDAO articleDAO = applicationContext.getBean("articleDAO", ArticleDAO.class);
+//
+//        articleDAO.findAll().stream().forEach(System.out::println);
 
 
     }
