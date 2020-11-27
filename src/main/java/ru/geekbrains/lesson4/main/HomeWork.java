@@ -31,7 +31,7 @@ public class HomeWork {
         Category category1 = new Category("Fruit");
         Category category2 = new Category("Vegetable");
 
-        Product product1 = new Product("Apple", 100l, 15.0, category1);
+        Product product1 = new Product("Apple", 100l, 15.0);
         Product product2 = new Product("Orange", 200l, 30.0);
         Product product3 = new Product("Mango", 30l, 25.0);
         Product product4 = new Product("Cucumber", 400l, 15.0);

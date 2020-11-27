@@ -20,6 +20,7 @@ public class Category {
 
     @OneToMany(
             mappedBy = "category",
+            
             fetch = FetchType.EAGER
     )
     List<Product> products = new ArrayList<>();
