@@ -1,8 +1,10 @@
 package ru.geekbrains.lesson4.services.impl;
 
+import javassist.runtime.Desc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.geekbrains.lesson4.entity.Category;
 import ru.geekbrains.lesson4.entity.Product;
 import ru.geekbrains.lesson4.repositories.ProductRepository;
 import ru.geekbrains.lesson4.services.ProductService;
@@ -53,9 +55,30 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAllByPriceGreaterThanEqual(price);
     }
 
+
+
     @Override
     public List<Product> findAllByPriceGreaterThanOrderByPriceDesc(Double price) {
         return productRepository.findAllByPriceGreaterThanOrderByPriceDesc(price);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<Product> findAllByCategoryOrderByPrice(Category category) {
+        return productRepository.findAllByCategoryOrderByPrice(category);
+    }
+
+    public Product findProductMinPrice (Category category) {
+        return findAllByCategoryOrderByPrice(category).get(0);
+    }
+
+    public Product findProductMaxPrice (Category category) {
+        List<Product> products = findAllByCategoryOrderByPrice(category);
+        return products.get(products.size() - 1);
+    }
+
+    @Override
+    public List <Product> findAllOrderByPrice() {
+        return productRepository.findAllOrderByPrice();
+    }
 }

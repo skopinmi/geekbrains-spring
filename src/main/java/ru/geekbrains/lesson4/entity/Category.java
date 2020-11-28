@@ -8,6 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "categories")
+//@NamedQuery(name = "withProducts", query = "SELECT c FROM Category c JOIN FETCH c.products WHERE c.id = :id")
 public class Category {
 
     @Id
@@ -20,10 +21,10 @@ public class Category {
 
     @OneToMany(
             mappedBy = "category",
-            
+            cascade = CascadeType.ALL,
             fetch = FetchType.EAGER
     )
-    List<Product> products = new ArrayList<>();
+    List<Product> products;
 
 //    @Version
 //    long version;
@@ -36,10 +37,10 @@ public class Category {
     }
 
 
-    public Category(String name, List<Product> products) {
-        this.products = products;
-        this.name = name;
-    }
+//    public Category(String name, List<Product> products) {
+//        this.products = products;
+//        this.name = name;
+//    }
 
     public String getName() {
         return name;

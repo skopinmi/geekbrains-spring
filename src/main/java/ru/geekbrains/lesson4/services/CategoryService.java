@@ -9,4 +9,5 @@ public interface CategoryService {
     List<Category> getAll();
     void save(Category category);
     void remove(Category category);
+
 }

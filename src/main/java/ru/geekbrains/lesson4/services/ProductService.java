@@ -1,5 +1,6 @@
 package ru.geekbrains.lesson4.services;
 
+import ru.geekbrains.lesson4.entity.Category;
 import ru.geekbrains.lesson4.entity.Product;
 
 import java.util.List;
@@ -13,5 +14,7 @@ public interface ProductService {
     Product findByName(String name);
     List<Product> findAllByPriceGreaterThan(Double price);
     List<Product> findAllByPriceGreaterThanOrderByPriceDesc(Double price);
+    List<Product> findAllByCategoryOrderByPrice(Category category);
+    List<Product> findAllOrderByPrice ();
 
 }

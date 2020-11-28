@@ -11,6 +11,7 @@ import ru.geekbrains.lesson4.repositories.CartDataRepository;
 import ru.geekbrains.lesson4.services.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HomeWork {
@@ -31,24 +32,33 @@ public class HomeWork {
         Category category1 = new Category("Fruit");
         Category category2 = new Category("Vegetable");
 
-        Product product1 = new Product("Apple", 100l, 15.0);
-        Product product2 = new Product("Orange", 200l, 30.0);
-        Product product3 = new Product("Mango", 30l, 25.0);
-        Product product4 = new Product("Cucumber", 400l, 15.0);
-        Product product5 = new Product("Tomato", 150l, 20.0);
-        Product product6 = new Product("Potato", 20l, 10.0);
+        categoryService.save(category1);
+        categoryService.save(category2);
+
+        Product product1 = new Product("Apple", 100l, 15.0, category1);
+        Product product2 = new Product("Orange", 200l, 30.0, category1);
+        Product product3 = new Product("Mango", 30l, 25.0, category1);
+        Product product4 = new Product("Cucumber", 400l, 15.0, category2);
+        Product product5 = new Product("Tomato", 150l, 20.0, category2);
+        Product product6 = new Product("Potato", 20l, 10.0, category2);
+        List<Product> productList = new ArrayList<>();
+        productList.add(product1);
+        productList.add(product2);
+        productList.add(product3);
+        category1.setProducts(productList);
+
+        List<Product> productList2 = new ArrayList<>();
+        productList.add(product4);
+        productList.add(product5);
+        productList.add(product6);
+        category2.setProducts(productList2);
+
         productService.save(product1);
         productService.save(product2);
         productService.save(product3);
         productService.save(product4);
         productService.save(product5);
         productService.save(product6);
-
-        List<Product> products1 = new ArrayList<>();
-        products1.add(product1);
-        products1.add(product2);
-        products1.add(product3);
-        category1.setProducts(products1);
 
 
 
@@ -61,9 +71,29 @@ public class HomeWork {
         cartEntryService.addProduct(cart1, product2, 5);
         cartEntryService.addProduct(cart1, product4, 15);
 
-        productService.getAll().stream().forEach(System.out::println);
-        categoryService.getAll().stream().filter(x -> x.getId()==1).forEach(System.out::println);
-        cartService.findCartByUser(user1).getCartEntryList().stream().forEach(System.out::println);
+
+        System.out.println("каталог товаров :");
+        categoryService.getAll().stream().forEach(System.out::println);
+//        a. минимальной ценой в каталоге,
+//        b. максимальной ценой из общего списка,
+//        c. минимальной и максимальной цене в каталог
+        List<Product> products = productService.findAllByCategoryOrderByPrice(category1);
+        System.out.println(products.get(0));
+
+        System.out.println(products.get(products.size() - 1));
+
+//        List<Product>
+
+        System.out.println(productService.findAllOrderByPrice().get(0));
+
+
+//        System.out.println(productService.findOneAsc());
+//        System.out.println(productService.getAll().stream().sorted().findFirst());
+//        System.out.println(productService.findOneDesc());
+
+
+//        categoryService.getAll().stream().filter(x -> x.getId()==1).forEach(System.out::println);
+//        cartService.findCartByUser(user1).getCartEntryList().stream().forEach(System.out::println);
 //        cartService.findCartByUser(user1).getCartEntryList().stream().filter(x -> x.getProduct().getCategory().equals(category1)).forEach(System.out::println);
     }
 }
