@@ -13,8 +13,11 @@ public interface ProductService {
     void remove(Product product);
     Product findByName(String name);
     List<Product> findAllByPriceGreaterThan(Double price);
-    List<Product> findAllByPriceGreaterThanOrderByPriceDesc(Double price);
     List<Product> findAllByCategoryOrderByPrice(Category category);
-    List<Product> findAllOrderByPrice ();
+    List<Product> findAllByPriceLessThan(Double price);
+    List<Product> findByCategoryOrderByPriceDesc(Category category);
 
+    String findSingleMaxPrice ();
+    String findSingleMinPrice();
+    Product findSingleProductMaxPrice();
 }

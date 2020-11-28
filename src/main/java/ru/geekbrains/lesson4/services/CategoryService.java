@@ -1,6 +1,7 @@
 package ru.geekbrains.lesson4.services;
 
 import ru.geekbrains.lesson4.entity.Category;
+import ru.geekbrains.lesson4.entity.Product;
 
 import java.util.List;
 

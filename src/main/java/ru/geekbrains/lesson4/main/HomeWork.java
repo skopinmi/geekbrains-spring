@@ -1,13 +1,14 @@
 package ru.geekbrains.lesson4.main;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import ru.geekbrains.lesson4.config.AppConfig;
 import ru.geekbrains.lesson4.data.CartData;
-import ru.geekbrains.lesson4.entity.Cart;
-import ru.geekbrains.lesson4.entity.Category;
-import ru.geekbrains.lesson4.entity.Product;
-import ru.geekbrains.lesson4.entity.User;
+import ru.geekbrains.lesson4.entity.*;
 import ru.geekbrains.lesson4.repositories.CartDataRepository;
+import ru.geekbrains.lesson4.repositories.ProductPaginationRepository;
 import ru.geekbrains.lesson4.services.*;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class HomeWork {
 
         CartService cartService = applicationContext.getBean("cartService", CartService.class);
         CartEntryService cartEntryService = applicationContext.getBean("cartEntryService", CartEntryService.class);
+
         ProductService productService = applicationContext.getBean("productService", ProductService.class);
         CategoryService categoryService = applicationContext.getBean("categoryService", CategoryService.class);
         UserService userService = applicationContext.getBean("userService", UserService.class);
@@ -72,28 +74,37 @@ public class HomeWork {
         cartEntryService.addProduct(cart1, product4, 15);
 
 
-        System.out.println("каталог товаров :");
+//        2. Вывести каталоги с товарами в консоль.
+
         categoryService.getAll().stream().forEach(System.out::println);
+
 //        a. минимальной ценой в каталоге,
-//        b. максимальной ценой из общего списка,
-//        c. минимальной и максимальной цене в каталог
+
         List<Product> products = productService.findAllByCategoryOrderByPrice(category1);
         System.out.println(products.get(0));
 
-        System.out.println(products.get(products.size() - 1));
+        System.out.println("less 16: " + productService.findAllByPriceLessThan(16.0));
 
-//        List<Product>
+//        b. максимальной ценой из общего списка,
 
-        System.out.println(productService.findAllOrderByPrice().get(0));
+        List<Product> products1 = productService.findAllByCategoryOrderByPrice(category1);
+        System.out.println("Max price: " + products1.get(products1.size() - 1));
 
-
-//        System.out.println(productService.findOneAsc());
-//        System.out.println(productService.getAll().stream().sorted().findFirst());
-//        System.out.println(productService.findOneDesc());
+        System.out.println("Max price: " + productService.findSingleProductMaxPrice());
 
 
-//        categoryService.getAll().stream().filter(x -> x.getId()==1).forEach(System.out::println);
-//        cartService.findCartByUser(user1).getCartEntryList().stream().forEach(System.out::println);
-//        cartService.findCartByUser(user1).getCartEntryList().stream().filter(x -> x.getProduct().getCategory().equals(category1)).forEach(System.out::println);
+//        c. минимальной и максимальной цене в каталог
+        System.out.println("макс " + productService.findByCategoryOrderByPriceDesc(category1).get(0));
+        System.out.println("макс " + productService.findByCategoryOrderByPriceDesc(category1).get(0));
+
+        System.out.println(productService.findSingleMaxPrice());
+        System.out.println(productService.findSingleMinPrice());
+
+        System.out.println(productService.findSingleProductMaxPrice());
+
+//        Pageable pageable = PageRequest.of(0, 1);
+//
+//        Page<Product> productPage = productService.getAll(pageable);
+//        System.out.println(productPage.getContent());
     }
 }

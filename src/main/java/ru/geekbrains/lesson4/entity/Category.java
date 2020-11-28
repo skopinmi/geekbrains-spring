@@ -21,13 +21,9 @@ public class Category {
 
     @OneToMany(
             mappedBy = "category",
-            cascade = CascadeType.ALL,
             fetch = FetchType.EAGER
     )
     List<Product> products;
-
-//    @Version
-//    long version;
 
     public Category() {
     }

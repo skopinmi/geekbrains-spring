@@ -15,6 +15,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     private CategoryRepository categoryRepository;
 
+
     @Autowired
     public void setCategoryRepository(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
@@ -43,6 +44,5 @@ public class CategoryServiceImpl implements CategoryService {
     public void remove(Category category) {
         categoryRepository.delete(category);
     }
-
 
 }

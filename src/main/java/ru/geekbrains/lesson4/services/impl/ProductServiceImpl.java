@@ -1,11 +1,11 @@
 package ru.geekbrains.lesson4.services.impl;
 
-import javassist.runtime.Desc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.lesson4.entity.Category;
 import ru.geekbrains.lesson4.entity.Product;
+import ru.geekbrains.lesson4.repositories.ProductPaginationRepository;
 import ru.geekbrains.lesson4.repositories.ProductRepository;
 import ru.geekbrains.lesson4.services.ProductService;
 
@@ -15,10 +15,12 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private ProductRepository productRepository;
+    private ProductPaginationRepository productPaginationRepository;
 
     @Autowired
-    public void setProductRepository(ProductRepository productRepository) {
+    public void setProductRepository(ProductRepository productRepository, ProductPaginationRepository productPaginationRepository) {
         this.productRepository = productRepository;
+        this.productPaginationRepository = productPaginationRepository;
     }
 
     @Override
@@ -55,13 +57,6 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAllByPriceGreaterThanEqual(price);
     }
 
-
-
-    @Override
-    public List<Product> findAllByPriceGreaterThanOrderByPriceDesc(Double price) {
-        return productRepository.findAllByPriceGreaterThanOrderByPriceDesc(price);
-    }
-
     @Override
     @Transactional(readOnly = true)
     public List<Product> findAllByCategoryOrderByPrice(Category category) {
@@ -78,7 +73,27 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List <Product> findAllOrderByPrice() {
-        return productRepository.findAllOrderByPrice();
+    public List<Product> findAllByPriceLessThan(Double price){
+        return productRepository.findAllByPriceLessThan(price);
+    }
+
+    @Override
+    public List<Product> findByCategoryOrderByPriceDesc(Category category) {
+        return productRepository.findAllByCategoryOrderByPrice(category);
+    }
+
+    @Override
+    public String findSingleMaxPrice (){
+        return productRepository.findSingleMaxPrice();
+    }
+
+    @Override
+    public String findSingleMinPrice (){
+        return productRepository.findSingleMinPrice();
+    }
+
+    @Override
+    public Product findSingleProductMaxPrice (){
+        return productRepository.findSingleProductMaxPrice();
     }
 }
