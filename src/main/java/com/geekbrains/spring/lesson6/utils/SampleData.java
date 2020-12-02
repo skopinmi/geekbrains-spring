@@ -1,5 +1,6 @@
 package com.geekbrains.spring.lesson6.utils;
 
+import com.geekbrains.spring.lesson6.entities.Category;
 import com.geekbrains.spring.lesson6.entities.Customer;
 import com.geekbrains.spring.lesson6.entities.Order;
 import com.geekbrains.spring.lesson6.entities.Product;
@@ -9,6 +10,8 @@ import com.geekbrains.spring.lesson6.repositories.ProductRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class SampleData {
@@ -35,8 +38,26 @@ public class SampleData {
         Product product7 = new Product("Avocado", 123.);
         Product product8 = new Product("Chicken", 125.);
 
+        Category category = new Category("meat");
+        Category category1 = new Category("plant");
+
         Customer customer1 = new Customer("Alex");
         Customer customer2 = new Customer("Alena");
+
+
+        List<Product> products = new ArrayList<>();
+        products.add(product8);
+        List<Product> products1 = new ArrayList<>();
+        products1.add(product1);
+        products1.add(product2);
+        products1.add(product3);
+        products1.add(product4);
+        products1.add(product5);
+        products1.add(product6);
+        products1.add(product7);
+
+        category.setProducts(products);
+        category1.setProducts(products1);
 
         Order order1 = new Order();
         order1.setTotalPrice(product1.getPrice());

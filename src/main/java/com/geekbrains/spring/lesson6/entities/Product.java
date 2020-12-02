@@ -24,6 +24,10 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
+    @ManyToOne
+    @JoinColumn (name = "category_id")
+    private Category category;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_date", updatable = false)
