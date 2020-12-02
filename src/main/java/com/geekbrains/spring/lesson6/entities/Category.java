@@ -33,7 +33,7 @@ public class Category {
 
     public Category( @NotEmpty String title) {
         this.title = title;
-        products = new ArrayList<>();
+//        products = new ArrayList<>();
 
     }
 

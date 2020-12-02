@@ -36,10 +36,10 @@ public class CategoryController {
                                      ,@RequestParam(defaultValue = "1", name = "p") Integer page
 //                                     ,@RequestParam Map<String, String> params
     ) {
-        page = (page < 1) ? 1 : page;
+//        page = (page < 1) ? 1 : page;
 //        CategoryFilter categoryFilter = new CategoryFilter(params);
 //        Page<Category> categories = PageRequest.of ategoryService.findAll();
-        Pageable pageable = PageRequest.of(page, 5);
+        Pageable pageable = PageRequest.of(1, 15);
 
         model.addAttribute("categories", categoryService.findAll(pageable));
         return "categories";
