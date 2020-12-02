@@ -4,6 +4,7 @@ import com.geekbrains.spring.lesson6.entities.Category;
 import com.geekbrains.spring.lesson6.entities.Customer;
 import com.geekbrains.spring.lesson6.entities.Order;
 import com.geekbrains.spring.lesson6.entities.Product;
+import com.geekbrains.spring.lesson6.repositories.CategoryRepository;
 import com.geekbrains.spring.lesson6.repositories.CustomerRepository;
 import com.geekbrains.spring.lesson6.repositories.OrderRepository;
 import com.geekbrains.spring.lesson6.repositories.ProductRepository;
@@ -19,11 +20,14 @@ public class SampleData {
     private CustomerRepository customerRepository;
     private ProductRepository productRepository;
     private OrderRepository orderRepository;
+    private CategoryRepository categoryRepository;
 
-    public SampleData(CustomerRepository customerRepository, ProductRepository productRepository, OrderRepository orderRepository) {
+    public SampleData(CustomerRepository customerRepository, ProductRepository productRepository,
+                      OrderRepository orderRepository, CategoryRepository categoryRepository) {
         this.customerRepository = customerRepository;
         this.productRepository = productRepository;
         this.orderRepository = orderRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @PostConstruct
@@ -71,6 +75,8 @@ public class SampleData {
 
         order2.setCode("0002");
 
+
+
         productRepository.save(product1);
         productRepository.save(product2);
         productRepository.save(product3);
@@ -80,8 +86,13 @@ public class SampleData {
         productRepository.save(product7);
         productRepository.save(product8);
 
+        categoryRepository.save(category);
+        categoryRepository.save(category1);
+
         customerRepository.save(customer1);
         customerRepository.save(customer2);
+
+
 
         orderRepository.save(order1);
         orderRepository.save(order2);

@@ -52,7 +52,7 @@
             <td th:text="${c.title}"/>
             <td th:text="${c.count}"/>
             <td>
-                <a class="btn btn-success" th:href="@{'/categories/${c.id}}">Выбор</a>
+                <a class="btn btn-success" th:href="@{'/categories/category/' + ${c.id}}">Выбор</a>
             </td>
         </tr>
         </tbody>
