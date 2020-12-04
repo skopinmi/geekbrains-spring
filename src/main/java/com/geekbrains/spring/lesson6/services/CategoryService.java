@@ -26,8 +26,12 @@ public class CategoryService {
         return categoryRepository.findAll(pageable);
     }
 
+
     public List<Product> findAllProductsById(Long id) {
         return categoryRepository.findAllProductsById(id);
     }
 
+    public Category findById(Long id) {
+        return categoryRepository.getOne(id);
+    }
 }

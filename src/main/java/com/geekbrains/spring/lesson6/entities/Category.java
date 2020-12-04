@@ -25,16 +25,11 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<Product> products;
 
-//    @Column(name = "count")
-//    private int count;
-
     public Category() {
     }
 
-    public Category( @NotEmpty String title) {
+    public Category( String title) {
         this.title = title;
-//        products = new ArrayList<>();
-
     }
 
     public Long getId() {

@@ -42,26 +42,35 @@ public class SampleData {
         Product product7 = new Product("Avocado", 123.);
         Product product8 = new Product("Chicken", 125.);
 
-        Category category = new Category("meat");
-        Category category1 = new Category("plant");
+        Category category = new Category("fruits");
+        Category category1 = new Category("meat");
+
+        product1.setCategory(category);
+        product2.setCategory(category);
+        product3.setCategory(category);
+        product4.setCategory(category);
+        product5.setCategory(category);
+        product6.setCategory(category);
+        product7.setCategory(category);
+        product8.setCategory(category1);
 
         Customer customer1 = new Customer("Alex");
         Customer customer2 = new Customer("Alena");
 
 
-        List<Product> products = new ArrayList<>();
-        products.add(product8);
-        List<Product> products1 = new ArrayList<>();
-        products1.add(product1);
-        products1.add(product2);
-        products1.add(product3);
-        products1.add(product4);
-        products1.add(product5);
-        products1.add(product6);
-        products1.add(product7);
-
-        category.setProducts(products);
-        category1.setProducts(products1);
+//        List<Product> products = new ArrayList<>();
+//        products.add(product8);
+//        List<Product> products1 = new ArrayList<>();
+//        products1.add(product1);
+//        products1.add(product2);
+//        products1.add(product3);
+//        products1.add(product4);
+//        products1.add(product5);
+//        products1.add(product6);
+//        products1.add(product7);
+//
+//        category.setProducts(products);
+//        category1.setProducts(products1);
 
         Order order1 = new Order();
         order1.setTotalPrice(product1.getPrice());
@@ -76,7 +85,8 @@ public class SampleData {
         order2.setCode("0002");
 
 
-
+        categoryRepository.save(category);
+        categoryRepository.save(category1);
         productRepository.save(product1);
         productRepository.save(product2);
         productRepository.save(product3);
@@ -86,8 +96,7 @@ public class SampleData {
         productRepository.save(product7);
         productRepository.save(product8);
 
-        categoryRepository.save(category);
-        categoryRepository.save(category1);
+
 
         customerRepository.save(customer1);
         customerRepository.save(customer2);

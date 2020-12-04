@@ -53,29 +53,31 @@
 <!--            <td th:text="${c.count}"/>-->
             <td>
                 <a class="btn btn-success" th:href="@{'/categories/category/' + ${c.id}}">Выбор</a>
+<!--                <a class="btn btn-success" th:href="@{'/products/category/' + ${c.id}}">Выбор</a>-->
+
             </td>
         </tr>
         </tbody>
     </table>
 
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-            <li class="page-item" th:classappend="${categories.isFirst() ? 'disabled' : ''}">
-                <a class="page-link"
-                   th:href="@{'/categories?p=' + ${categories.previousOrFirstPageable().getPageNumber() + 1} }">Назад</a>
-            </li>
+<!--    <nav aria-label="Page navigation">-->
+<!--        <ul class="pagination">-->
+<!--            <li class="page-item" th:classappend="${categories.isFirst() ? 'disabled' : ''}">-->
+<!--                <a class="page-link"-->
+<!--                   th:href="@{'/categories?p=' + ${categories.previousOrFirstPageable().getPageNumber() + 1} }">Назад</a>-->
+<!--            </li>-->
 
-            <li class="page-item" th:classappend="${categories.getNumber() + 1 == i ? 'active' : ''}"
-                th:each="i : ${#numbers.sequence(1, categories.getTotalPages())}">
-                <a class="page-link" th:text="${i}" th:href="@{'/categories?p=' + ${i}}"></a>
-            </li>
+<!--            <li class="page-item" th:classappend="${categories.getNumber() + 1 == i ? 'active' : ''}"-->
+<!--                th:each="i : ${#numbers.sequence(1, categories.getTotalPages())}">-->
+<!--                <a class="page-link" th:text="${i}" th:href="@{'/categories?p=' + ${i} }"></a>-->
+<!--            </li>-->
 
-            <li class="page-item"  th:classappend="${categories.isLast() ? 'disabled' : ''}">
-                <a class="page-link"
-                   th:href="@{'/categories?p='+ ${categories.nextOrLastPageable().getPageNumber() + 1}}">Вперед</a>
-            </li>
-        </ul>
-    </nav>
+<!--            <li class="page-item"  th:classappend="${categories.isLast() ? 'disabled' : ''}">-->
+<!--                <a class="page-link"-->
+<!--                   th:href="@{'/categories?p='+ ${categories.nextOrLastPageable().getPageNumber() + 1}}">Вперед</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </nav>-->
 </div>
 
 </body>
