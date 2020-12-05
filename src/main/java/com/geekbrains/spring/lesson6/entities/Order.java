@@ -1,29 +1,34 @@
 package com.geekbrains.spring.lesson6.entities;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.geekbrains.spring.lesson6.entities.views.OrderEntryView;
+import com.geekbrains.spring.lesson6.entities.views.OrderView;
+import com.geekbrains.spring.lesson6.entities.views.ProductView;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "orders")
-public class Order {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+public class Order extends AbstractItem {
 
     @Column(name = "code")
+    @JsonView(OrderView.IdCode.class)
     private String code;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @JsonView(OrderView.IdCodePriceCustomer.class)
     private Customer customer;
 
-    @OneToMany(mappedBy = "order", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
-    private List<OrderEntry> orderEntries;
-
     @Column(name = "totalPrice")
+    @JsonView(OrderView.IdCodePriceCustomer.class)
     private Double totalPrice;
+
+    @OneToMany(mappedBy = "order", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    @JsonView(OrderView.IdCodeCustomerOrderEntry.class)
+    private List<OrderEntry> orderEntries = new ArrayList<>();
 
     public String getCode() {
         return code;
@@ -31,14 +36,6 @@ public class Order {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Customer getCustomer() {

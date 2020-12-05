@@ -1,53 +1,41 @@
 package com.geekbrains.spring.lesson6.entities;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.geekbrains.spring.lesson6.entities.views.ProductView;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.Date;
 
 @Entity
 @Table(name = "products")
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+public class Product extends AbstractItem {
 
     @NotEmpty
     @Size(min=3, max=20, message="Title must have 3-20 characters")
     @Column(name = "title")
+    @JsonView(ProductView.IdName.class)
     private String title;
 
+    @NotEmpty
+    @Size(min=3, max=20, message="Title must have 3-20 characters")
+    @Column(name = "brand_name")
+    @JsonView(ProductView.IdName.class)
+    private String brandName;
+
     @Column(name = "price")
+    @JsonView(ProductView.FullProduct.class)
     private Double price;
-
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "create_date", updatable = false)
-    private Date createDate;
-
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "modify_date")
-    private Date modifyDate;
 
     public Product() {
     }
 
-    public Product(String title, Double price) {
+    public Product(String title, String brandName, Double price) {
         this.title = title;
+        this.brandName = brandName;
         this.price = price;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -58,6 +46,14 @@ public class Product {
         this.title = title;
     }
 
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
     public Double getPrice() {
         return price;
     }
@@ -66,26 +62,10 @@ public class Product {
         this.price = price;
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date getModifyDate() {
-        return modifyDate;
-    }
-
-    public void setModifyDate(Date modifyDate) {
-        this.modifyDate = modifyDate;
-    }
-
     @Override
     public String toString() {
         return "Product{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", title='" + title + '\'' +
                 ", price=" + price +
                 '}';

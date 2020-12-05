@@ -34,6 +34,9 @@ public class ProductController {
         Page<Product> products = productService.findAll(productFilter.getSpec(), page - 1, 5);
         model.addAttribute("products", products);
         model.addAttribute("filterDefinition", productFilter.getFilterDefinition());
+
+        productService.getProductByMaxPrice();
+
         return "products";
     }
 

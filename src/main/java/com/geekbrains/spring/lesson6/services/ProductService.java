@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,7 +35,25 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public void saveOrUpdate(Product product) {
+    public Product saveOrUpdate(Product product) {
+        return productRepository.save(product);
+    }
+
+    public Product update(Product product) {
         productRepository.save(product);
+        return productRepository.getOne(product.getId());
+    }
+
+    public void getProductByMaxPrice(){
+        List<Product> productByMaxPrice = productRepository.getProductByMaxPrice();
+        System.out.println(productByMaxPrice);
+    }
+
+    public List<Product> findAll() {
+        return productRepository.findAll();
+    }
+
+    public void remove(Long id) {
+        productRepository.deleteById(id);
     }
 }

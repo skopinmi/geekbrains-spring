@@ -1,32 +1,35 @@
 package com.geekbrains.spring.lesson6.entities;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.geekbrains.spring.lesson6.entities.views.OrderEntryView;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "order_items")
-public class OrderEntry {
+public class OrderEntry extends AbstractItem {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "quantity")
+    @JsonView(OrderEntryView.Entry.class)
+    private int quantity;
+
+    @Column(name = "price_per_product")
+    @JsonView(OrderEntryView.Entry.class)
+    private Double basePrice;
+
+    @Column(name = "price")
+    @JsonView(OrderEntryView.Entry.class)
+    private Double totalPrice;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
+    @JsonView(OrderEntryView.Entry.class)
     private Product product;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
+    @JsonView(OrderEntryView.Order.class)
     private Order order;
-
-    @Column(name = "quantity")
-    private int quantity;
-
-    @Column(name = "price_per_product")
-    private Double basePrice;
-
-    @Column(name = "price")
-    private Double totalPrice;
 
     public OrderEntry() {
     }
@@ -38,12 +41,13 @@ public class OrderEntry {
         this.totalPrice = product.getPrice();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public OrderEntry(Product product, Order order) {
+        this.product = product;
+        this.order = order;
+        this.quantity = 1;
+        this.basePrice = product.getPrice();
+        this.totalPrice = product.getPrice();
+        order.getOrderEntries().add(this);
     }
 
     public Product getProduct() {

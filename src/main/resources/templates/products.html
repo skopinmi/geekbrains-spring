@@ -42,6 +42,7 @@
             <th>ID</th>
             <th>Фотография</th>
             <th>Название</th>
+            <th>Бренд</th>
             <th>Цена</th>
             <th>Дата создания</th>
             <th>Дата изменения</th>
@@ -55,6 +56,7 @@
                 <img th:src="@{/img/no_image_available.png}" th:width="50" />
             </td>
             <td th:text="${p.title}"/>
+            <td th:text="${p.brandName}"/>
             <td th:text="#{text.products.price(${p.price})}"/>
             <td th:text="${{p.createDate}}"/>
             <td th:text="${{p.modifyDate}}"/>
