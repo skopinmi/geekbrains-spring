@@ -107,4 +107,17 @@ public class Customer extends AbstractItem {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", birthday=" + birthday +
+                ", address='" + address + '\'' +
+                ", description='" + description + '\'' +
+                ", orders=" + orders +
+                '}';
+    }
 }
