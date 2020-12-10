@@ -17,8 +17,8 @@
             <div class="col-md-6">
                 <div th:replace="~{fragments/navigation :: navigation(Products)}" />
                 <h1>Добавить новый товар</h1>
-                <!--/*@thymesVar id="customer" type="com.geekbrains.spring.lesson6.entities.Product"*/-->
-                <form method="post" th:action="@{/products/add}" th:object="${product}">
+                <!--/*@thymesVar id="product" type="com.geekbrains.spring.lesson8.entities.Product"*/-->
+                <form method="post" th:action="@{/admin/products/add}" th:object="${product}">
                     <div class="form-group col-md-6">
                         <label for="title">Название</label>
                         <input class="form-control" name="title" type="text" id="title" th:field="*{title}">
