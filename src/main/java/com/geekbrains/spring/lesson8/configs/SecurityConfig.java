@@ -38,11 +38,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .and()
-                .logout() // This is missing and is important
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login");
+//                .loginPage("/login")
+//                .and()
+//                .logout() // This is missing and is important
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                .logoutSuccessUrl("/login")
+                ;
     }
 
 //    @Bean
@@ -69,40 +70,40 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        return new InMemoryUserDetailsManager(user, admin, sa);
 //    }
 
-//    @Bean
-//    public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource) {
-//
-//        UserDetails user = User.builder()
-//                .username("user")
-//                .password("{noop}11")
-//                .authorities("ROLE_USER")
-//                .build();
-//
-//        UserDetails admin = User.builder()
-//                .username("admin")
-//                .password("{bcrypt}$2y$12$kppL/79H63sx3NoXlZhY/uDW2EiB18ByX8YeENyFwyxAnHjrCT4pK")
-//                .authorities("ROLE_USER", "ROLE_ADMIN")
-//                .build();
-//
-//        UserDetails sa = User.builder()
-//                .username("sa")
-//                .password("{bcrypt}$2y$12$kppL/79H63sx3NoXlZhY/uDW2EiB18ByX8YeENyFwyxAnHjrCT4pK")
-//                .authorities("ROLE_USER", "ROLE_ADMIN", "ROLE_SUPER_ADMIN")
-//                .build();
-//
-//        JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
-//
-//        if(!manager.userExists(user.getUsername())){
-//            manager.createUser(user);
-//        }
-//        if(!manager.userExists(admin.getUsername())){
-//            manager.createUser(admin);
-//        }
-//        if(!manager.userExists(sa.getUsername())){
-//            manager.createUser(sa);
-//        }
-//        return manager;
-//    }
+    @Bean
+    public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource) {
+
+        UserDetails user = User.builder()
+                .username("user")
+                .password("{noop}11")
+                .authorities("ROLE_USER")
+                .build();
+
+        UserDetails admin = User.builder()
+                .username("admin")
+                .password("{bcrypt}$2y$12$kppL/79H63sx3NoXlZhY/uDW2EiB18ByX8YeENyFwyxAnHjrCT4pK")
+                .authorities("ROLE_USER", "ROLE_ADMIN")
+                .build();
+
+        UserDetails sa = User.builder()
+                .username("sa")
+                .password("{bcrypt}$2y$12$kppL/79H63sx3NoXlZhY/uDW2EiB18ByX8YeENyFwyxAnHjrCT4pK")
+                .authorities("ROLE_USER", "ROLE_ADMIN", "ROLE_SUPER_ADMIN")
+                .build();
+
+        JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
+
+        if(!manager.userExists(user.getUsername())){
+            manager.createUser(user);
+        }
+        if(!manager.userExists(admin.getUsername())){
+            manager.createUser(admin);
+        }
+        if(!manager.userExists(sa.getUsername())){
+            manager.createUser(sa);
+        }
+        return manager;
+    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
