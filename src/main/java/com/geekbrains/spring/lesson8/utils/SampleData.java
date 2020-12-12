@@ -51,6 +51,7 @@ public class SampleData {
         Role role1 = new Role("ROLE_USER");
         Role role2 = new Role("ROLE_ADMIN");
         Role role3 = new Role("ROLE_SUPER_ADMIN");
+        Role role4 = new Role("ROLE_MANAGER");
 
         User user1 = new User("Alex", "test@test1.com", "79000000001", new Date(), "Russia, SPb, Leninskiy street 10-10", "something");
         user1.setUsername("alex");
@@ -71,13 +72,12 @@ public class SampleData {
         user3.setName("anonymousUser");
         user3.getRoles().add(role1);
 
-//        User user4 = new User();
-//        user4.setUsername("admin");
-//        user4.setName("admin");
-//        //user4.setPassword("{bcrypt}$2y$12$kppL/79H63sx3NoXlZhY/uDW2EiB18ByX8YeENyFwyxAnHjrCT4pK");
-//        user4.setPassword("$2y$12$kppL/79H63sx3NoXlZhY/uDW2EiB18ByX8YeENyFwyxAnHjrCT4pK");
-//        user4.getRoles().add(role1);
-//        user4.getRoles().add(role2);
+        User user4 = new User("Masha", "test@test2.com", "79000000002", new Date(), "Russia, Msk, Leninskiy street 01-01", "something else");
+        user4.setUsername("masha");
+        //user4.setPassword("{bcrypt}$2y$12$kppL/79H63sx3NoXlZhY/uDW2EiB18ByX8YeENyFwyxAnHjrCT4pK");
+        user4.setPassword("$2y$12$kppL/79H63sx3NoXlZhY/uDW2EiB18ByX8YeENyFwyxAnHjrCT4pK");
+        user4.getRoles().add(role4);
+        user4.getRoles().add(role1);
 //        user4.getRoles().add(role3);
 
         Order order1 = new Order();
@@ -114,11 +114,12 @@ public class SampleData {
         roleRepository.save(role1);
         roleRepository.save(role2);
         roleRepository.save(role3);
+        roleRepository.save(role4);
 
         userRepository.save(user1);
         userRepository.save(user2);
         userRepository.save(user3);
-        //userRepository.save(user4);
+        userRepository.save(user4);
 
         orderRepository.save(order1);
         orderRepository.save(order2);

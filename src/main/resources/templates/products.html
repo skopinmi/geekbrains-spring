@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="utf-8"/>
     <title>Каталог товаров</title>
@@ -27,7 +30,7 @@
 
         <button class="btn btn-primary" type="submit">Применить</button>
         <a class="btn btn-primary" th:href="@{/admin/products}">Очистить фильтр</a>
-        <a class="btn btn-primary" th:href="@{/admin/products/add}">Добавить новый товар</a>
+        <a class="btn btn-primary" th:href="@{/admin/products/add}" sec:authorize="hasAnyRole('ADMIN','SUPER_ADMIN')">Добавить новый товар</a>
     </form>
 
     <br>
@@ -57,7 +60,7 @@
             <td th:text="${{p.modifyDate}}"/>
             <td>
                 <a class="btn btn-success" th:href="@{'/cart/add/' + ${p.id}}">В корзину</a>
-                <a class="btn btn-danger" th:href="@{'/products/edit/' + ${p.id}}">Изменить</a>
+                <a class="btn btn-danger" th:href="@{'/products/edit/' + ${p.id}}" sec:authorize="hasAnyRole('ADMIN','SUPER_ADMIN')">Изменить</a>
             </td>
         </tr>
         </tbody>

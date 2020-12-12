@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8"/>
     <title>Список заказов</title>
@@ -37,7 +39,7 @@
             <th>Код заказ</th>
             <th>Клиент</th>
             <th>Цена</th>
-            <th>Действие</th>
+            <th sec:authorize="hasAnyRole('ADMIN','SUPER_ADMIN')">Действие</th>
         </tr>
         </thead>
         <tbody>
@@ -47,7 +49,7 @@
             <td th:text="${o.user.name}"/>
             <td th:text="${o.totalPrice}"/>
             <td>
-                <a class="btn btn-danger" th:href="@{'/orders/remove/' + ${o.id}}">Удалить</a>
+                <a class="btn btn-danger" th:href="@{'/orders/remove/' + ${o.id}}" sec:authorize="hasAnyRole('ADMIN','SUPER_ADMIN')">Удалить</a>
             </td>
         </tr>
         </tbody>
