@@ -5,6 +5,8 @@ import com.geekbrains.spring.lesson8.data.UserData;
 import com.geekbrains.spring.lesson8.entities.Role;
 import com.geekbrains.spring.lesson8.entities.User;
 import com.geekbrains.spring.lesson8.repositories.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -65,6 +67,14 @@ public class UserService implements UserDetailsService {
                 .collect(Collectors.toList());
         Authentication authentication = new UsernamePasswordAuthenticationToken(new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities), null, authorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    public Page<User> getAllUser(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
+
+    public List<User> getAllUser() {
+        return userRepository.findAll();
     }
 
     @Override

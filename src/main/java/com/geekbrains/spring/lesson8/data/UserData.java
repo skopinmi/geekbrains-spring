@@ -1,6 +1,9 @@
 package com.geekbrains.spring.lesson8.data;
 
+import com.geekbrains.spring.lesson8.entities.Role;
+
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 
 public class UserData {
 
@@ -12,6 +15,15 @@ public class UserData {
     private String password;
     private String email;
     private String phone;
+//    private Collection<Role> roles;
+//
+//    public Collection<Role> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(Collection<Role> roles) {
+//        this.roles = roles;
+//    }
 
     public String getName() {
         return name;
