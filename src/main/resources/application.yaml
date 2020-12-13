@@ -6,7 +6,7 @@ server:
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:D:\java-learn\geekbrains\spring-lesson-5\db\demo;MV_STORE=false
+    url: jdbc:h2:file:D:\Coding\GeekBrains\Java\geekbrains-spring\db\demo;MV_STORE=false
     username: sa
     password:
 
@@ -16,7 +16,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
         hbm2ddl:
-            auto: create
+           auto: create
+           #auto: update
 
   h2:
     console:
@@ -27,6 +28,6 @@ spring:
   thymeleaf:
     enabled: true
     encoding: UTF-8
-    mode: HTML5
+    mode: HTML
     prefix: classpath:/templates/
     suffix: .html
